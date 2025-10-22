@@ -145,4 +145,61 @@ include '../partials/header.php';
                         </div>
                         
                         <div class="col-md-4 mb-3">
-                            <label class="form-label">Satuan <span
+                            <label class="form-label">Satuan <span class="text-danger">*</span></label>
+                            <select class="form-select" name="satuan" required>
+                                <option value="pcs" <?= $produk['satuan'] == 'pcs' ? 'selected' : '' ?>>Pcs</option>
+                                <option value="box" <?= $produk['satuan'] == 'box' ? 'selected' : '' ?>>Box</option>
+                                <option value="kg" <?= $produk['satuan'] == 'kg' ? 'selected' : '' ?>>Kg</option>
+                                <option value="gram" <?= $produk['satuan'] == 'gram' ? 'selected' : '' ?>>Gram</option>
+                                <option value="liter" <?= $produk['satuan'] == 'liter' ? 'selected' : '' ?>>Liter</option>
+                                <option value="ml" <?= $produk['satuan'] == 'ml' ? 'selected' : '' ?>>ML</option>
+                                <option value="lusin" <?= $produk['satuan'] == 'lusin' ? 'selected' : '' ?>>Lusin</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Deskripsi</label>
+                        <textarea class="form-control" name="deskripsi" rows="3"><?= htmlspecialchars($produk['deskripsi']) ?></textarea>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save"></i> Update Produk
+                        </button>
+                        <a href="kelola_produk.php" class="btn btn-secondary">Batal</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h6 class="mb-0"><i class="bi bi-info-circle"></i> Informasi Produk</h6>
+            </div>
+            <div class="card-body">
+                <table class="table table-sm table-borderless">
+                    <tr>
+                        <td>Dibuat:</td>
+                        <td><?= date('d/m/Y H:i', strtotime($produk['created_at'])) ?></td>
+                    </tr>
+                    <tr>
+                        <td>Update:</td>
+                        <td><?= date('d/m/Y H:i', strtotime($produk['updated_at'])) ?></td>
+                    </tr>
+                </table>
+                <hr>
+                <small class="text-muted">
+                    <ul class="mb-0">
+                        <li>Perubahan harga tidak mempengaruhi transaksi lama</li>
+                        <li>Pastikan stok sesuai dengan fisik barang</li>
+                    </ul>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include '../partials/footer.php'; ?>
