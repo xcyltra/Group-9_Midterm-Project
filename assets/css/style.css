@@ -1,0 +1,201 @@
+/* Custom Styles untuk Sistem Kasir */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.card {
+    border: none;
+    box-shadow: 0 0 20px rgba(0,0,0,.08);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    border-bottom: 2px solid rgba(0,0,0,.05);
+    padding: 1rem 1.25rem;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.btn {
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+}
+
+.badge {
+    padding: 0.4em 0.8em;
+    font-weight: 500;
+}
+
+/* Kasir Page Styles */
+.product-item {
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+}
+
+.product-item:hover {
+    border-color: #0d6efd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+.product-item.selected {
+    border-color: #198754;
+    background-color: #f0f9f4;
+}
+
+.cart-item {
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px 0;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-control input {
+    width: 60px;
+    text-align: center;
+}
+
+/* Struk Styles */
+.struk-container {
+    width: 80mm;
+    margin: 0 auto;
+    padding: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    background: white;
+}
+
+.struk-header {
+    text-align: center;
+    border-bottom: 2px dashed #000;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.struk-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.struk-footer {
+    border-top: 2px dashed #000;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.struk-total {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Print Styles */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .struk-container, .struk-container * {
+        visibility: visible;
+    }
+    .struk-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 80mm;
+    }
+    .no-print {
+        display: none !important;
+    }
+}
+
+/* Alert Styles */
+.alert {
+    border-radius: 8px;
+    border: none;
+}
+
+/* Modal Styles */
+.modal-content {
+    border-radius: 10px;
+    border: none;
+}
+
+.modal-header {
+    border-bottom: 2px solid #f0f0f0;
+}
+
+/* Form Styles */
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13,110,253,.25);
+}
+
+/* Stock Warning */
+.stock-warning {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.stock-ok {
+    color: #198754;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    transition: transform 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Search Box */
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    padding-left: 40px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cart-sidebar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50vh;
+        z-index: 1000;
+        background: white;
+        border-top: 3px solid #0d6efd;
+    }
+}
