@@ -75,7 +75,7 @@ if (isset($_SESSION['user_id'])) {
                 
                 <div class="text-center mt-3">
                     <small class="text-muted">
-                        Demo: admin/password atau kasir1/password
+                        Kelompok 9 - Pemrograman Lanjut
                     </small>
                 </div>
             </div>
