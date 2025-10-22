@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id']) || !isset($_GET['id'])) {
 
 $id_transaksi = intval($_GET['id']);
 
-// Ambil data transaksi
 $query = "SELECT t.*, u.nama_lengkap as nama_kasir 
           FROM transaksi t 
           JOIN users u ON t.id_kasir = u.id_user 
@@ -24,7 +23,6 @@ if (mysqli_num_rows($result) === 0) {
 
 $transaksi = mysqli_fetch_assoc($result);
 
-// Ambil detail transaksi
 $query_detail = "SELECT dt.*, p.nama_produk, p.satuan 
                  FROM detail_transaksi dt 
                  JOIN produk p ON dt.id_produk = p.id_produk 

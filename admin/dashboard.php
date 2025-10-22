@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
 $page_title = 'Dashboard Admin';
 
-// Query untuk statistik
 $query_total_produk = mysqli_query($con, "SELECT COUNT(*) as total FROM produk");
 $total_produk = mysqli_fetch_assoc($query_total_produk)['total'];
 
@@ -22,11 +21,9 @@ $total_pendapatan = mysqli_fetch_assoc($query_total_pendapatan)['total'] ?? 0;
 $query_stok_menipis = mysqli_query($con, "SELECT COUNT(*) as total FROM produk WHERE stok <= stok_minimum");
 $stok_menipis = mysqli_fetch_assoc($query_stok_menipis)['total'];
 
-// Transaksi hari ini
 $query_transaksi_hari_ini = mysqli_query($con, "SELECT COUNT(*) as total, SUM(total_harga) as pendapatan FROM transaksi WHERE DATE(tanggal_transaksi) = CURDATE() AND status = 'selesai'");
 $transaksi_hari_ini = mysqli_fetch_assoc($query_transaksi_hari_ini);
 
-// Produk terlaris
 $query_produk_terlaris = mysqli_query($con, "
     SELECT p.nama_produk, SUM(dt.jumlah) as total_terjual 
     FROM detail_transaksi dt 

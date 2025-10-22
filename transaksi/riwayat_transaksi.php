@@ -9,23 +9,19 @@ if (!isset($_SESSION['user_id'])) {
 
 $page_title = 'Riwayat Transaksi';
 
-// Filter
 $dari_tanggal = isset($_GET['dari_tanggal']) ? $_GET['dari_tanggal'] : date('Y-m-d');
 $sampai_tanggal = isset($_GET['sampai_tanggal']) ? $_GET['sampai_tanggal'] : date('Y-m-d');
 $status_filter = isset($_GET['status']) ? mysqli_real_escape_string($con, $_GET['status']) : 'semua';
 
-// Query transaksi
 $query = "SELECT t.*, u.nama_lengkap as nama_kasir 
           FROM transaksi t 
           JOIN users u ON t.id_kasir = u.id_user 
           WHERE DATE(t.tanggal_transaksi) BETWEEN '$dari_tanggal' AND '$sampai_tanggal'";
 
-// Filter berdasarkan role
 if ($_SESSION['role'] === 'kasir') {
     $query .= " AND t.id_kasir = " . $_SESSION['user_id'];
 }
 
-// Filter status
 if ($status_filter !== 'semua') {
     $query .= " AND t.status = '$status_filter'";
 }

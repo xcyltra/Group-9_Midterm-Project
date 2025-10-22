@@ -10,13 +10,11 @@ if (!isset($_SESSION['user_id']) || !isset($_GET['id'])) {
 $page_title = 'Detail Transaksi';
 $id_transaksi = intval($_GET['id']);
 
-// Ambil data transaksi
 $query = "SELECT t.*, u.nama_lengkap as nama_kasir, u.username 
           FROM transaksi t 
           JOIN users u ON t.id_kasir = u.id_user 
           WHERE t.id_transaksi = $id_transaksi";
 
-// Batasi kasir hanya bisa lihat transaksinya sendiri
 if ($_SESSION['role'] === 'kasir') {
     $query .= " AND t.id_kasir = " . $_SESSION['user_id'];
 }
@@ -31,7 +29,6 @@ if (mysqli_num_rows($result) === 0) {
 
 $transaksi = mysqli_fetch_assoc($result);
 
-// Ambil detail transaksi
 $query_detail = "SELECT dt.*, p.nama_produk, p.kode_produk, p.satuan, k.nama_kategori 
                  FROM detail_transaksi dt 
                  JOIN produk p ON dt.id_produk = p.id_produk 

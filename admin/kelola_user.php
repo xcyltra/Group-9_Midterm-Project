@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
 $page_title = 'Kelola User';
 
-// Handle toggle status user
 if (isset($_GET['toggle_status'])) {
     $id_user = intval($_GET['toggle_status']);
     $query = "UPDATE users SET is_active = NOT is_active WHERE id_user = $id_user";
@@ -22,11 +21,9 @@ if (isset($_GET['toggle_status'])) {
     exit();
 }
 
-// Handle hapus user
 if (isset($_GET['hapus'])) {
     $id_user = intval($_GET['hapus']);
     
-    // Cek apakah user pernah melakukan transaksi
     $check = mysqli_query($con, "SELECT id_transaksi FROM transaksi WHERE id_kasir = $id_user LIMIT 1");
     if (mysqli_num_rows($check) > 0) {
         $_SESSION['error_message'] = 'User tidak dapat dihapus karena memiliki riwayat transaksi!';
@@ -42,7 +39,6 @@ if (isset($_GET['hapus'])) {
     exit();
 }
 
-// Proses tambah user
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'tambah') {
     $username = mysqli_real_escape_string($con, $_POST['username']);
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -51,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $no_telp = mysqli_real_escape_string($con, $_POST['no_telp']);
     $role = mysqli_real_escape_string($con, $_POST['role']);
     
-    // Cek username
     $check = mysqli_query($con, "SELECT id_user FROM users WHERE username = '$username'");
     if (mysqli_num_rows($check) > 0) {
         $_SESSION['error_message'] = 'Username sudah digunakan!';
@@ -68,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     exit();
 }
 
-// Proses edit user
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'edit') {
     $id_user = intval($_POST['id_user']);
     $username = mysqli_real_escape_string($con, $_POST['username']);
@@ -77,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $no_telp = mysqli_real_escape_string($con, $_POST['no_telp']);
     $role = mysqli_real_escape_string($con, $_POST['role']);
     
-    // Update password jika diisi
     if (!empty($_POST['password'])) {
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $query = "UPDATE users SET username = '$username', password = '$password', 
@@ -98,7 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     exit();
 }
 
-// Ambil data user
 $query = "SELECT * FROM users ORDER BY created_at DESC";
 $result = mysqli_query($con, $query);
 
@@ -240,7 +232,6 @@ include '../partials/header.php';
     </div>
 </div>
 
-<!-- Modal Tambah -->
 <div class="modal fade" id="modalTambah" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">

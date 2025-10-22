@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $page_title = 'Kasir';
 
-// Ambil data produk dengan stok tersedia
 $search = isset($_GET['search']) ? mysqli_real_escape_string($con, $_GET['search']) : '';
 $kategori_filter = isset($_GET['kategori']) ? intval($_GET['kategori']) : 0;
 
@@ -29,7 +28,6 @@ if ($kategori_filter > 0) {
 $query .= " ORDER BY p.nama_produk ASC";
 $result = mysqli_query($con, $query);
 
-// Ambil daftar kategori
 $kategori_list = mysqli_query($con, "SELECT * FROM kategori ORDER BY nama_kategori ASC");
 
 include '../partials/header.php';
@@ -42,7 +40,6 @@ include '../partials/header.php';
 </div>
 
 <div class="row">
-    <!-- Bagian Produk -->
     <div class="col-lg-7">
         <div class="card mb-3">
             <div class="card-body">
@@ -100,7 +97,6 @@ include '../partials/header.php';
         </div>
     </div>
 
-    <!-- Bagian Keranjang -->
     <div class="col-lg-5">
         <div class="card sticky-top" style="top: 20px;">
             <div class="card-header bg-primary text-white">
@@ -255,7 +251,6 @@ function updateCart() {
     cartDataInput.value = JSON.stringify(cart);
     btnProses.disabled = false;
     
-    // Update kembalian otomatis
     calculateKembalian();
 }
 
@@ -278,10 +273,8 @@ function formatRupiah(angka) {
     return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-// Event listener untuk perhitungan kembalian
 document.getElementById('jumlah-bayar').addEventListener('input', calculateKembalian);
 
-// Validasi sebelum submit
 document.getElementById('form-pembayaran').addEventListener('submit', function(e) {
     const jumlahBayar = parseFloat(document.getElementById('jumlah-bayar').value) || 0;
     const totalHarga = cart.reduce((sum, item) => sum + (item.harga * item.qty), 0);

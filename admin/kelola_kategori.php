@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
 $page_title = 'Kelola Kategori';
 
-// Proses tambah kategori
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'tambah') {
     $nama_kategori = mysqli_real_escape_string($con, $_POST['nama_kategori']);
     $deskripsi = mysqli_real_escape_string($con, $_POST['deskripsi']);
@@ -24,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     exit();
 }
 
-// Proses edit kategori
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'edit') {
     $id_kategori = intval($_POST['id_kategori']);
     $nama_kategori = mysqli_real_escape_string($con, $_POST['nama_kategori']);
@@ -40,11 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     exit();
 }
 
-// Proses hapus kategori
 if (isset($_GET['hapus'])) {
     $id_kategori = intval($_GET['hapus']);
     
-    // Cek apakah kategori digunakan
     $check = mysqli_query($con, "SELECT id_produk FROM produk WHERE id_kategori = $id_kategori LIMIT 1");
     if (mysqli_num_rows($check) > 0) {
         $_SESSION['error_message'] = 'Kategori tidak dapat dihapus karena masih digunakan!';
@@ -60,7 +56,6 @@ if (isset($_GET['hapus'])) {
     exit();
 }
 
-// Ambil data kategori
 $query = "SELECT k.*, COUNT(p.id_produk) as jumlah_produk 
           FROM kategori k 
           LEFT JOIN produk p ON k.id_kategori = p.id_kategori 
@@ -158,7 +153,6 @@ include '../partials/header.php';
     </div>
 </div>
 
-<!-- Modal Tambah -->
 <div class="modal fade" id="modalTambah" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">

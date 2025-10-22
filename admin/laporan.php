@@ -9,11 +9,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
 $page_title = 'Laporan Penjualan';
 
-// Filter
 $dari_tanggal = isset($_GET['dari_tanggal']) ? $_GET['dari_tanggal'] : date('Y-m-01');
 $sampai_tanggal = isset($_GET['sampai_tanggal']) ? $_GET['sampai_tanggal'] : date('Y-m-d');
 
-// Query laporan
 $query = "SELECT DATE(tanggal_transaksi) as tanggal, 
           COUNT(*) as jumlah_transaksi, 
           SUM(total_harga) as total_pendapatan,
@@ -25,7 +23,6 @@ $query = "SELECT DATE(tanggal_transaksi) as tanggal,
           ORDER BY tanggal DESC";
 $result = mysqli_query($con, $query);
 
-// Total keseluruhan
 $query_total = "SELECT 
                 COUNT(*) as total_transaksi,
                 SUM(total_harga) as total_pendapatan
@@ -34,7 +31,6 @@ $query_total = "SELECT
                 AND DATE(tanggal_transaksi) BETWEEN '$dari_tanggal' AND '$sampai_tanggal'";
 $total = mysqli_fetch_assoc(mysqli_query($con, $query_total));
 
-// Produk terlaris
 $query_terlaris = "SELECT p.nama_produk, k.nama_kategori, 
                    SUM(dt.jumlah) as total_terjual,
                    SUM(dt.subtotal) as total_nilai

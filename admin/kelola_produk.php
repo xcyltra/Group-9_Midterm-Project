@@ -9,11 +9,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
 $page_title = 'Kelola Produk';
 
-// Handle hapus produk
 if (isset($_GET['hapus'])) {
     $id_produk = intval($_GET['hapus']);
     
-    // Cek apakah produk pernah digunakan dalam transaksi
     $check = mysqli_query($con, "SELECT id_detail FROM detail_transaksi WHERE id_produk = $id_produk LIMIT 1");
     if (mysqli_num_rows($check) > 0) {
         $_SESSION['error_message'] = 'Produk tidak dapat dihapus karena sudah pernah ditransaksikan!';
@@ -29,7 +27,6 @@ if (isset($_GET['hapus'])) {
     exit();
 }
 
-// Ambil data produk dengan kategori
 $search = isset($_GET['search']) ? mysqli_real_escape_string($con, $_GET['search']) : '';
 $kategori_filter = isset($_GET['kategori']) ? intval($_GET['kategori']) : 0;
 
@@ -49,7 +46,6 @@ if ($kategori_filter > 0) {
 $query .= " ORDER BY p.nama_produk ASC";
 $result = mysqli_query($con, $query);
 
-// Ambil daftar kategori untuk filter
 $kategori_list = mysqli_query($con, "SELECT * FROM kategori ORDER BY nama_kategori ASC");
 
 include '../partials/header.php';

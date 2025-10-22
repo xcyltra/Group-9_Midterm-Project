@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
 $page_title = 'Edit Produk';
 
-// Ambil ID produk
 if (!isset($_GET['id'])) {
     header("Location: kelola_produk.php");
     exit();
@@ -17,7 +16,6 @@ if (!isset($_GET['id'])) {
 
 $id_produk = intval($_GET['id']);
 
-// Proses update produk
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_kategori = intval($_POST['id_kategori']);
     $kode_produk = mysqli_real_escape_string($con, $_POST['kode_produk']);
@@ -29,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $satuan = mysqli_real_escape_string($con, $_POST['satuan']);
     $deskripsi = mysqli_real_escape_string($con, $_POST['deskripsi']);
     
-    // Validasi kode produk unik (kecuali untuk produk sendiri)
     $check = mysqli_query($con, "SELECT id_produk FROM produk WHERE kode_produk = '$kode_produk' AND id_produk != $id_produk");
     if (mysqli_num_rows($check) > 0) {
         $_SESSION['error_message'] = 'Kode produk sudah digunakan!';
@@ -56,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Ambil data produk
 $query = "SELECT * FROM produk WHERE id_produk = $id_produk";
 $result = mysqli_query($con, $query);
 
@@ -68,7 +64,6 @@ if (mysqli_num_rows($result) === 0) {
 
 $produk = mysqli_fetch_assoc($result);
 
-// Ambil daftar kategori
 $kategori_list = mysqli_query($con, "SELECT * FROM kategori ORDER BY nama_kategori ASC");
 
 include '../partials/header.php';
