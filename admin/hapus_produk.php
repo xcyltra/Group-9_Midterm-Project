@@ -129,4 +129,4 @@ include '../partials/header.php';
     </div>
 </div>
 
-<?php include '../partials/footer.php'; ?
+<?php include '../partials/footer.php'; ?>

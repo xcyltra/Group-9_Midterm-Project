@@ -127,9 +127,9 @@ $detail = mysqli_query($con, $query_detail);
 
     <div class="struk-container">
         <div class="struk-header">
-            <h4>SISTEM KASIRKU</h4>
+            <h4>KASIRKU</h4>
             <small>Kelompok 9 - Pemrograman Lanjut</small><br>
-            <small>Jl. Contoh No. 123, Semarang</small><br>
+            <small>Jl. Soekarno Hatta No.KM 15, Balikpapan</small><br>
             <small>Telp: 0812-3456-7890</small>
         </div>
 

@@ -11,7 +11,7 @@ if (isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrasi - Sistem Kasir</title>
+    <title>Registrasi - KasirKu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 </head>
@@ -24,7 +24,7 @@ if (isset($_SESSION['user_id'])) {
                         <div class="text-center mb-4">
                             <i class="bi bi-person-plus-fill text-success" style="font-size: 3rem;"></i>
                             <h3 class="mt-3">Registrasi Akun</h3>
-                            <p class="text-muted">Buat akun baru untuk sistem kasir</p>
+                            <p class="text-muted">Buat akun baru untuk KasirKu</p>
                         </div>
 
                         <?php if (isset($_SESSION['error'])): ?>
