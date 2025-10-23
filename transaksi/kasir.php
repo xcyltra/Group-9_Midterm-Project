@@ -48,8 +48,8 @@ include '../partials/header.php';
                         <input type="text" class="form-control" name="search" placeholder="Cari produk..." value="<?= htmlspecialchars($search) ?>">
                     </div>
                     <div class="col-md-3">
-                        <select name="kategori" class="form-select">
-                            <option value="0">Semua</option>
+                        <select name="kategori" class="form-select" onchange="this.form.submit()">
+                            <option value="0">Semua Kategori</option>
                             <?php 
                             mysqli_data_seek($kategori_list, 0);
                             while ($kat = mysqli_fetch_assoc($kategori_list)): 
